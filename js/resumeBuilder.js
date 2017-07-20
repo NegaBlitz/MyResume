@@ -24,7 +24,7 @@ var work = {
             "description": "Currently training in front-end development."
         }
     ]
-}
+};
 
 var projects = {
     "projects": [{
@@ -40,7 +40,7 @@ var projects = {
             "images": ["images/mm1-400_medium_1x.png"]
         }
     ]
-}
+};
 
 var bio = {
     "name": "Colin Beard",
@@ -54,7 +54,7 @@ var bio = {
         "location": "West Lafayette, IN"
     },
     "skills": ["Artist", "Musician", "Video Game Designer", "Programmer"]
-}
+};
 
 var education = {
     "schools": [{
@@ -71,7 +71,7 @@ var education = {
         "dates": "July 10 2017-September 1 2017",
         "url": "https://www.udacity.com/"
     }]
-}
+};
 
 //HEADER AND SKILLS
 bio.display = function() {
@@ -91,12 +91,12 @@ bio.display = function() {
     //SKILLS
     if (bio.skills.length > 0) {
         $("#header").append(HTMLskillsStart);
-        for (s in bio.skills) {
-            var formattedSkill = HTMLskills.replace("%data%", bio.skills[s])
+        bio.skills.forEach(function(skill) {
+            var formattedSkill = HTMLskills.replace("%data%", skill);
             $("#skills").append(formattedSkill);
-        }
+        });
     }
-}
+};
 
 //Call header function for top part of page
 bio.display();
@@ -113,11 +113,11 @@ function contacts(pageLocation) {
     formattedContact = formattedContact.replace("%contact%", "Email");
     $(pageLocation).append(formattedContact);
 
-    var formattedContact = HTMLcontactGeneric.replace("%data%", bio.contacts.github);
+    formattedContact = HTMLcontactGeneric.replace("%data%", bio.contacts.github);
     formattedContact = formattedContact.replace("%contact%", "GitHub");
     $(pageLocation).append(formattedContact);
 
-    var formattedContact = HTMLcontactGeneric.replace("%data%", bio.contacts.location);
+    formattedContact = HTMLcontactGeneric.replace("%data%", bio.contacts.location);
     formattedContact = formattedContact.replace("%contact%", "Location");
     $(pageLocation).append(formattedContact);
 
@@ -140,7 +140,7 @@ work.display = function() {
 
         $(".work-entry:last").append(formattedEmployer + formattedJob + formattedLocation + formattedDates + formattedDescription);
     });
-}
+};
 
 //Call work function
 work.display();
@@ -158,10 +158,10 @@ projects.display = function() {
 
         project.images.forEach(function(image) {
             formattedImages.push(HTMLprojectImage.replace("%data%", image));
-        })
+        });
 
         $(".project-entry:last").append(formattedTitle + formattedDates + formattedDescription + formattedImages);
-    })
+    });
 };
 
 //Call projects function
@@ -182,10 +182,10 @@ education.display = function() {
 
         school.majors.forEach(function(major) {
             formattedMajors.push(HTMLschoolMajor.replace("%data%", major));
-        })
+        });
 
         $(".education-entry:last").append(formattedName + formattedDegree + formattedDates + formattedLocation + formattedMajors);
-    })
+    });
     //Online courses
     $(".education-entry:last").append(HTMLonlineClasses);
     education.onlineCourses.forEach(function(course) {
@@ -196,7 +196,7 @@ education.display = function() {
         var formattedURL = HTMLonlineURL.replace("%data%", course.url);
 
         $(".education-entry:last").append(formattedName + formattedSchool + formattedDates + formattedURL);
-    })
+    });
 };
 
 //Call education function
