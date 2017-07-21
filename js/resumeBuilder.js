@@ -46,7 +46,7 @@ var bio = {
     "name": "Colin Beard",
     "role": "Designer",
     "welcomeMessage": "Hello, welcome to my resume!",
-    "bioPic": "images/negablitz-400_medium_1x.jpg",
+    "biopic": "images/negablitz-400_medium_1x.jpg",
     "contacts": {
         "mobile": "(828)-994-1782",
         "email": "silvercpb@gmail.com",
@@ -82,7 +82,7 @@ bio.display = function() {
     var formattedName = HTMLheaderName.replace("%data%", bio.name);
     $("#header").prepend(formattedName);
 
-    var formattedPic = HTMLbioPic.replace("%data%", bio.bioPic);
+    var formattedPic = HTMLbioPic.replace("%data%", bio.biopic);
     $("#header").append(formattedPic);
 
     var formattedMsg = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
@@ -96,15 +96,16 @@ bio.display = function() {
             $("#skills").append(formattedSkill);
         });
     }
+		
+		//Call contacts functions for bio information (since it's used in two different spots on this page)
+		contacts("#topContacts");
+		contacts("#footerContacts");
 };
 
-//Call header function for top part of page
-bio.display();
-
 //CONTACTS
-var formattedContact;
 
 function contacts(pageLocation) {
+		var formattedContact;
     formattedContact = HTMLcontactGeneric.replace("%data%", bio.contacts.mobile);
     formattedContact = formattedContact.replace("%contact%", "Mobile");
     $(pageLocation).append(formattedContact);
@@ -123,10 +124,6 @@ function contacts(pageLocation) {
 
 }
 
-//Call contacts functions
-contacts("#topContacts");
-contacts("#footerContacts");
-
 //WORK
 work.display = function() {
     work.jobs.forEach(function(job) {
@@ -141,9 +138,6 @@ work.display = function() {
         $(".work-entry:last").append(formattedEmployer + formattedJob + formattedLocation + formattedDates + formattedDescription);
     });
 };
-
-//Call work function
-work.display();
 
 //PROJECTS
 projects.display = function() {
@@ -163,9 +157,6 @@ projects.display = function() {
         $(".project-entry:last").append(formattedTitle + formattedDates + formattedDescription + formattedImages);
     });
 };
-
-//Call projects function
-projects.display();
 
 //EDUCATION
 education.display = function() {
@@ -198,6 +189,15 @@ education.display = function() {
         $(".education-entry:last").append(formattedName + formattedSchool + formattedDates + formattedURL);
     });
 };
+
+//Call header function for top part of page
+bio.display();
+
+//Call work function
+work.display();
+
+//Call projects function
+projects.display();
 
 //Call education function
 education.display();
